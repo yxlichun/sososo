@@ -1,0 +1,36 @@
+{
+  "name": "sososo",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "sososo": "bin/sososo.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lichun",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.6.0",
+    "chalk": "^2.3.0",
+    "commander": "^2.12.2",
+    "consolidate": "^0.15.0",
+    "escodegen": "^1.9.0",
+    "esprima": "^4.0.0",
+    "estraverse": "^4.2.0",
+    "fs": "^0.0.1-security",
+    "handlebars": "^4.0.11",
+    "inquirer": "^4.0.2",
+    "metalsmith": "^2.3.0",
+    "path": "^0.12.7",
+    "prettier-eslint": "^8.4.0",
+    "babel-eslint": "~7.1.1",
+    "eslint": "~3.19.0",
+    "eslint-config-airbnb-base": "~11.1.3",
+    "eslint-friendly-formatter": "~3.0.0",
+    "eslint-loader": "~1.7.1",
+    "eslint-plugin-html": "~3.0.0",
+    "eslint-plugin-import": "~2.2.0"
+  }
+}
