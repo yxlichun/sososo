@@ -7,11 +7,11 @@ const commander = require('commander')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 
-const config = require('../util/config').getConfig()
+const config = require('./util/config').getConfig()
 const moduleModeConfig = config.getBasicConfig('module')
 
-const runGenerateModule = require('../lib/module')
-const runGeneratePage = require('../lib/page')
+const runGenerateModule = require('./lib/module')
+const runGeneratePage = require('./lib/page')
 
 commander
   .version('0.1.0')
@@ -68,12 +68,8 @@ function generateModule(moduleName) {
 }
 
 function generatePage(moduleName, pageName) {
-  const to = path.join(moduleModeConfig.destBasePath, moduleName.toLowerCase());
+  // todo moduleName大小写待完善
+  const to = path.join(moduleModeConfig.destBasePath, moduleName);
 
-  if (!fs.existsSync(to)) {
-    console.log('Can not find this module!')
-    console.log()
-  } else {
-    runGeneratePage(moduleName, pageName)
-  }
+  runGeneratePage(moduleName, pageName)
 }

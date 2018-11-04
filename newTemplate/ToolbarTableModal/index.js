@@ -18,7 +18,7 @@ const withSaga = injectSaga({ key: NAMESPACE, saga });
 @withRouter
 @withSaga
 @withReducer
-class {{pageNameUpper}} extends React.Component {
+class <%=pageNameUpper%> extends React.Component {
   render() {
     return (
       <div>
@@ -29,4 +29,4 @@ class {{pageNameUpper}} extends React.Component {
   }
 }
 
-export default {{pageNameUpper}};
+export default <%=pageNameUpper%>;
