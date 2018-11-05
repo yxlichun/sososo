@@ -8,18 +8,9 @@ const inquirer = require('inquirer')
 const runGeneratePage = require('./lib/page')
 
 commander
-  .version('0.1.0')
-  .option('-h, --help', 'show help')
+  .version('0.1.2')
   .option('-c, --create [value]', 'create a new page')
   .parse(process.argv);
-
-commander.on('--help', () => {
-  console.log('  Examples:')
-  console.log()
-  console.log(chalk.gray('    # create a new module'))
-  console.log('    $ npm run init -c moduleName')
-  console.log()
-})
 
 if (commander.create) {
   inquirer.prompt([{
@@ -34,7 +25,6 @@ if (commander.create) {
         name: 'key'
       }]).then(module => {
         if (module.key) {
-          console.log(module.key, commander.create)
           generatePage(module.key, commander.create)
         }
       })
