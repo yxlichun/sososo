@@ -4,36 +4,51 @@
 const commander = require('commander')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
+const fs = require('fs');
+const path = require('path');
 
-const runGeneratePage = require('./lib/page')
+const config = require('./util/config').getConfig();
+const runGeneratePage = require('./lib/page');
+const Templates = require('./lib/templates');
 
 commander
-  .version('0.1.2')
+  .version('0.1.1')
   .option('-c, --create [value]', 'create a new page')
   .parse(process.argv);
 
-if (commander.create) {
+// 获取可选模板类型；
+const templates = Templates.getTemplates();
+
+console.log(chalk.yellow('The template version is ' + Templates.checkTemplateVersion()) );
+console.log();
+
+// 用户选择模板
+inquirer.prompt([{
+  type: 'list',
+  message: 'Please choose the template',
+  default: config.defaultTemplate,
+  choices: templates,
+  name: 'template',
+}]).then(({ template }) => {
   inquirer.prompt([{
     type: 'confirm',
     message: 'Does it has a parent module?',
-    name: 'ok'
-  }]).then(answers => {
-    if (answers.ok) {
+    name: 'type'
+  }]).then(({ type }) => {
+    if (type) {
       inquirer.prompt([{
         type: 'input',
         message: 'Please enter the parent module key: ',
-        name: 'key'
-      }]).then(module => {
-        if (module.key) {
-          generatePage(module.key, commander.create)
+        name: 'parent'
+      }]).then(({ parent }) => {
+        if (parent) {
+          console.log(template, parent, commander.create)
+          runGeneratePage(template, parent, commander.create)
         }
       })
     } else {
-      generatePage(null, commander.create)
+      console.log(template, null, commander.create)
+      runGeneratePage(template, null, commander.create)
     }
   })
-}
-
-function generatePage(moduleName, pageName) {
-  runGeneratePage(moduleName, pageName)
-}
+})
