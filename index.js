@@ -1,54 +1,19 @@
 #!/usr/bin/env node
 'use strict'
 
-const commander = require('commander')
-const chalk = require('chalk')
-const inquirer = require('inquirer')
-const fs = require('fs');
-const path = require('path');
-
-const config = require('./util/config').getConfig();
-const runGeneratePage = require('./lib/page');
-const Templates = require('./lib/templates');
+const commander = require('commander');
+const generatePage = require('./lib/page/index');
 
 commander
   .version('0.1.4')
-  .option('-c, --create [value]', 'create a new page')
+  .option('-c, --component [componentName]', 'create a new component')
+  .option('-p, --page [pageName]', 'create a new page')
+  .option('-P, --project [projectName]', 'create a new project')
+  .option('-d, --delete [componentName]', 'delete a component')
   .parse(process.argv);
 
-Templates.checkTemplateVersion()
-  .then(Templates.getTemplatesInfo)
-  .then(({ templates, packagePath }) => {
-    inquirer.prompt([{
-      type: 'list',
-      message: 'Please choose the template',
-      default: config.defaultTemplate,
-      choices: templates,
-      name: 'template',
-    }]).then(({ template }) => {
-      const templateInfo = {
-        template: template,
-        packagePath: packagePath,
-      };
 
-      inquirer.prompt([{
-        type: 'confirm',
-        message: 'Does it has a parent module?',
-        name: 'type'
-      }]).then(({ type }) => {
-        if (type) {
-          inquirer.prompt([{
-            type: 'input',
-            message: 'Please enter the parent module key: ',
-            name: 'parent'
-          }]).then(({ parent }) => {
-            if (parent) {
-              runGeneratePage(templateInfo, parent, commander.create)
-            }
-          })
-        } else {
-          runGeneratePage(templateInfo, null, commander.create)
-        }
-      })
-    })
-  })
+if (commander.page) {
+  generatePage(commander.page);
+}
+
