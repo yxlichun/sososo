@@ -24,4 +24,39 @@ Template.getTemplatePackagePath = function() {
   }
 };
 
+Template.checkTemplateVersion = function() {
+  const templatePath = Template.getTemplatePackagePath();
+  if (templatePath) {
+    const file = fs.readFileSync(path.join(templatePath, 'package.json'));
+    const templateFeature = JSON.parse(file);
+
+    console.log(chalk.yellow('The template version is ' + templateFeature.version));
+    console.log();
+  }
+  return templatePath;
+}
+
+Template.getTemplateInfo = function(packagePath, subPath) {
+  packagePath = packagePath || Template.getTemplatePackagePath();
+  return {
+    templates: getTemplateFolds(packagePath, subPath),
+    packagePath: packagePath,
+  }
+}
+
+function getTemplateFolds(packagePath, subPath) {
+  const arr = [];
+  const templatePath = path.join(packagePath, subPath);
+  const files = fs.readdirSync(templatePath);
+
+  files.forEach(function (item, index) {
+      const stat = fs.lstatSync(path.join(templatePath, item));
+      if (stat.isDirectory() === true) { 
+        arr.push(item)
+      }
+  });
+
+  return arr;
+}
+
 module.exports = Template;

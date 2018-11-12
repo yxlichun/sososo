@@ -33,6 +33,6 @@
     "path": "^0.12.7",
     "prettier-eslint": "^8.4.0",
     "sofa-template": "^1.0.0",
-    "superagent": "^4.0.0-beta.5"
+    "superagent": "^3.8.3"
   }
 }
