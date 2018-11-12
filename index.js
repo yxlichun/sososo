@@ -3,6 +3,7 @@
 
 const commander = require('commander');
 const generatePage = require('./lib/page/index');
+const generateComponent = require('./lib/component/index');
 
 commander
   .version('0.1.4')
@@ -15,5 +16,9 @@ commander
 
 if (commander.page) {
   generatePage(commander.page);
+}
+
+if (commander.component) {
+  generateComponent(commander.component);
 }
 
