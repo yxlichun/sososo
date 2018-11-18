@@ -6,7 +6,7 @@ const generatePage = require('./lib/page/index');
 const generateComponent = require('./lib/component/index');
 
 commander
-  .version('0.1.5')
+  .version('0.1.7')
   .option('-c, --component [componentName]', 'create a new component')
   .option('-p, --page [pageName]', 'create a new page')
   .option('-P, --project [projectName]', 'create a new project')
