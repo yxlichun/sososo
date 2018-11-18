@@ -1,6 +1,6 @@
 {
   "name": "sososo",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -32,7 +32,7 @@
     "metalsmith": "^2.3.0",
     "path": "^0.12.7",
     "prettier-eslint": "^8.4.0",
-    "sofa-template": "^1.0.0",
+    "sofa-template": "^1.0.3",
     "superagent": "^3.8.3"
   }
 }
